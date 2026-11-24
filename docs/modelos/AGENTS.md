@@ -13,6 +13,10 @@ Calcula, concilia e registra pagamentos de clientes PJ.
 - Juros, multa e arredondamento: SOMENTE em
   dominio/calculo/ (ver ADR-0007)
 
+## Precedência
+Se este arquivo e o código discordarem, siga as
+convenções do código e aponte cada inconsistência.
+
 ## Comandos (Python)
 - Testes:      pytest
 - Estilo:      ruff check .
