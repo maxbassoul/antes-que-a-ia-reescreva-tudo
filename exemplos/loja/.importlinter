@@ -1,0 +1,26 @@
+# Configuração do import-linter: regras sobre quem
+# pode importar quem, conferidas a cada mudança
+[importlinter]
+# o pacote principal do projeto
+root_package = loja
+
+# Regra 1: camadas. Quem está em cima pode usar quem
+# está embaixo; o contrário é proibido. Assim, o
+# domínio (regras de negócio) não depende da API
+[importlinter:contract:camadas-pedidos]
+name = Em pedidos, o domínio não conhece as camadas de cima
+type = layers
+layers =
+    loja.pedidos.api
+    loja.pedidos.aplicacao
+    loja.pedidos.dominio
+
+# Regra 2: independência. Nenhum destes contextos
+# pode importar diretamente outro da lista
+[importlinter:contract:contextos]
+name = Os contextos não importam uns aos outros
+type = independence
+modules =
+    loja.pedidos
+    loja.estoque
+    loja.faturamento

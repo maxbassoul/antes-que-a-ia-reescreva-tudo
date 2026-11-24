@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "Se usar este material, cite o livro e o repositório."
+title: "Antes que a IA reescreva tudo: material complementar"
+authors:
+  - family-names: "Carvalho"
+    given-names: "Diego Marques de"
+repository-code: "https://github.com/maxbassoul/antes-que-a-ia-reescreva-tudo"
+license: MIT
+version: 0.1.0
+date-released: 2026-11-23

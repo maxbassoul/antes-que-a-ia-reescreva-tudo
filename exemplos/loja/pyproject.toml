@@ -1,0 +1,16 @@
+[project]
+name = "loja-exemplo"
+version = "0.1.0"
+description = "Projeto de exemplo do livro Antes que a IA Reescreva Tudo"
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 79
+
+[tool.ruff.lint]
+# Regras padrão do ruff: erros de estilo (E) e defeitos (F)
+select = ["E", "F"]

@@ -1,0 +1,50 @@
+# Camadas 2 e 3 do pipeline (Apêndice G do livro).
+# Roda nas mudanças enviadas e em todo pull request.
+name: verificacao
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  ferramentas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[dev]"
+      - run: ruff check .
+      - run: mypy --strict src/contencao/cli.py src/contencao/catraca.py src/contencao/instrucoes.py
+      - run: pytest
+
+  exemplo-loja:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: exemplos/loja
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e "../..[dev]"
+      - name: Estilo e defeitos simples
+        run: ruff check .
+      - name: Direção das dependências (Cap. 11)
+        run: lint-imports
+        env:
+          PYTHONPATH: src
+      - name: Tipos nas fronteiras (Cap. 7)
+        run: mypy --strict src/loja/pedidos
+      - name: Testes e funções de aptidão
+        run: pytest
+      - name: Mapa atualizado (Cap. 9)
+        run: contencao mapa src/loja && git diff --exit-code MAPA.md
+      - name: Higiene do arquivo de instruções (Cap. 9)
+        run: contencao instrucoes AGENTS.md
+      - name: Catraca, só violações novas (Cap. 11)
+        run: |
+          ruff check . --output-format concise --exit-zero --quiet > v.txt
+          contencao catraca verificar v.txt

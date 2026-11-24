@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "contencao"
+version = "0.1.0"
+description = "Ferramentas do livro Antes que a IA Reescreva Tudo"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Diego Marques de Carvalho" }]
+
+[project.optional-dependencies]
+dev = ["pytest", "import-linter", "ruff", "mypy"]
+
+[project.scripts]
+contencao = "contencao.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 79
+extend-exclude = ["exemplos"]
+
+[tool.ruff.lint]
+select = ["E", "F"]

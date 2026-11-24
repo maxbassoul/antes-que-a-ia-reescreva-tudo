@@ -1,0 +1,12 @@
+# .github/CODEOWNERS
+# Cada linha: caminho e equipe que precisa aprovar
+# qualquer mudança nele antes da integração
+/AGENTS.md       @minha-org/arquitetura
+/.importlinter   @minha-org/arquitetura
+/tests/          @minha-org/qualidade
+# O pipeline e este próprio arquivo: quem muda as
+# regras de verificação precisa de aprovação
+/.github/        @minha-org/arquitetura
+# Configuração de build, tipos e lint
+/pyproject.toml  @minha-org/arquitetura
+/Makefile        @minha-org/arquitetura
